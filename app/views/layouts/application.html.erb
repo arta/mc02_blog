@@ -29,7 +29,9 @@
         <li><a href='https://github.com/mackenziechild'>Github</a></li>
         <li><a href='mailto:hey@mackenziechild.me'>Email</a></li>
       </ul>
-      <p class="sign_in">Admin Login</p>
+      <% unless user_signed_in? %>
+        <p class="sign_in"><%= link_to 'Admin Login', user_session_path %></p>
+      <% end %>  
     </div>
 
     <div id="main_content">
@@ -38,11 +40,12 @@
           <%= yield :header %>
         </p>
         <%#= render 'layouts/header' %>
-
-        <div class="buttons">
-          <button class="button"><%= link_to 'New Post', new_post_path %></button>
-          <button class="button"><%= link_to 'Log out', '#' %></button>
-        </div>
+        <% if user_signed_in? %>
+          <div class="buttons">
+            <button class="button"><%= link_to 'New Post', new_post_path %></button>
+            <button class="button"><%= link_to 'Log out', destroy_user_session_path, method: :delete %></button>
+          </div>
+        <% end %>
       </div>
 
       <% flash.each do |name, message| %>
