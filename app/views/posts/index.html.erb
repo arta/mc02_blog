@@ -1,3 +1,5 @@
+<% content_for :header do %>All Posts<% end %>
+
 <% @posts.each do |post| %>
   <div class="post_wrapper">
     <h2 class="title"><%= link_to post.title, post %></h2>
